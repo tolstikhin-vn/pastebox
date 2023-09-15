@@ -7,5 +7,5 @@ public class PasteboxRequest {
 
     private String data;
     private long expirationTimeSeconds;
-    private PublicStatus publicStatus;
+    private String status;
 }

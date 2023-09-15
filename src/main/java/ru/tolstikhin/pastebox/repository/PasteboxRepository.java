@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface PasteboxRepository extends JpaRepository<PasteboxEntity, Long> {
     Optional<PasteboxEntity> getByHash(String hash);
 
-    Optional<List<PasteboxEntity>> findByIsPublicAndLifeTimeAfterOrderByLifeTimeAsc(boolean isPublic, LocalDateTime currentTime);
+    Optional<List<PasteboxEntity>> findTop10ByStatusNameAndLifeTimeAfterOrderByIdDesc(String statusName, LocalDateTime currentTime);
 }

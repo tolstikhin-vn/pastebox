@@ -1,12 +1,13 @@
 package ru.tolstikhin.pastebox.api.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import ru.tolstikhin.pastebox.api.request.PublicStatus;
 
 @Data
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class PasteboxResponse {
     private final String data;
-    private final boolean isPublic;
+    private String status;
 }

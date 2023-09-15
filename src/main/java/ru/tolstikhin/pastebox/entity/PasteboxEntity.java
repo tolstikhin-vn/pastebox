@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,18 +23,21 @@ public class PasteboxEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "data", nullable = false)
     private String data;
 
-    @Column(name = "hash", nullable = false)
+    @Column(name = "hash", nullable = false, unique = true)
     private String hash;
 
     @Column(name = "life_time", nullable = false)
-    private LocalDateTime lifeTime;
+    private Timestamp lifeTime;
 
-    @Column(name = "is_public", nullable = false)
-    private boolean isPublic;
+    @Column(name = "status_id", nullable = false, unique = true)
+    private Integer statusId;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false, insertable = false, updatable = false)
+    private StatusEntity status;
 }
