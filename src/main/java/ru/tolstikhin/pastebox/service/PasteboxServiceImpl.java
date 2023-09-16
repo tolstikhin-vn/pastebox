@@ -54,15 +54,9 @@ public class PasteboxServiceImpl implements PasteboxService {
     public List<PasteboxResponse> getFirstPublicPastebox() {
         LocalDateTime currentTime = LocalDateTime.now();
 
-        // Проверить на наличие пасты с таким хешом
-        Optional<List<PasteboxEntity>> pasteboxesList =
-                pasteboxRepository.findTop10ByStatusNameAndLifeTimeAfterOrderByIdDesc(Status.PUBLIC.getStatusString(), currentTime);
-        if (pasteboxesList.isEmpty()) {
-            throw new HashNotFoundException("Hash not found");
-        }
+        List<PasteboxEntity> pasteboxesList = pasteboxRepository.findTop10ByStatusNameAndLifeTimeAfterOrderByIdDesc(Status.PUBLIC.getStatusString(), currentTime);
 
-        List<PasteboxEntity> pasteboxEntities = pasteboxesList.get();
-        return pasteboxEntities.stream().map(PasteboxEntity -> new PasteboxResponse(PasteboxEntity.getData())).collect(Collectors.toList());
+        return pasteboxesList.stream().map(PasteboxEntity -> new PasteboxResponse(PasteboxEntity.getData())).collect(Collectors.toList());
     }
 
     /**
